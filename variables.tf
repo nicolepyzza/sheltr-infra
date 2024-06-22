@@ -1,14 +1,14 @@
 variable "environment" {
-  type = string
+  type        = string
   description = "environment of the deployment"
 }
 
 variable "bucket_name" {
-  type = string
+  type        = string
   description = "bucket for tfstate"
 }
 
 variable "key" {
-  type = string
+  type        = string
   description = "key of state file"
 }
