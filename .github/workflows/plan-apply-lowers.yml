@@ -1,0 +1,75 @@
+## make sure to use s3 info here
+## bucket, key, region, lock table, env
+
+name: 'plan and apply'
+on:
+  push:
+    branches:
+      - main
+  pull_request: {}
+
+env:
+    AWS_ACCESS_KEY: ${{ secrets.AWS_ACCESS_KEY_ID }}
+    AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+    TF_VAR_bucket_name: 'www.sheltr.pet'
+    TF_VAR_environment: 'lowers'
+    TF_VAR_key: 'infra/tf/lowers.tfstate'
+
+jobs:
+  terraform-init-fmt:
+    name: Terraform Init and Format
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+
+      - name: Initialize Terraform
+        run: terraform init
+
+      - name: Format Terraform code
+        run: terraform fmt -check
+
+  terraform-plan:
+    name: Terraform Plan
+    runs-on: ubuntu-latest
+    needs: terraform-init-fmt  # Ensure this job runs after init and fmt
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-1
+
+
+      - name: Initialize Terraform
+        run: terraform init
+
+      - name: Terraform Plan
+        run: terraform plan
+
+  terraform-apply:
+    name: Terraform Apply
+    runs-on: ubuntu-latest
+    needs: terraform-plan  # Ensure this job runs after the plan job
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+
+      - name: Initialize Terraform
+        run: terraform init
+
+      - name: Terraform Apply
+        run: terraform apply -auto-approve
