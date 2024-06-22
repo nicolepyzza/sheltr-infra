@@ -1,8 +1,8 @@
 terraform {
     backend "s3" {
-      bucket = var.bucket_name
+      bucket = "www.sheltr.pet"
       region = "us-east-1"
-      key = var.key
+      key = "infra/tf/lowers.tfstate"
     }
     required_providers {
       aws = {
