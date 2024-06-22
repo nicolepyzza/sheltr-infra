@@ -1,6 +1,6 @@
 terraform {
     backend "s3" {
-      bucket = "www.sheltr.pet"
+      bucket = "sheltr-tfstate"
       region = "us-east-1"
       key = "infra/tf/lowers.tfstate"
     }
