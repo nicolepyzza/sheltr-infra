@@ -18,7 +18,7 @@ provider "aws" {
   default_tags {
     tags = {
       CreatedBy   = "sheltr-infra"
-      Environment = var.environment
+      Environment = "lowers"
     }
   }
 }
