@@ -15,7 +15,7 @@ resource "aws_s3_bucket_versioning" "sheltr_web" {
 }
 
 resource "aws_s3_bucket_policy" "sheltr_web" {
-  bucket = aws_s3_bucket.sheltr_web
+  bucket = aws_s3_bucket.sheltr_web.id
   policy = data.aws_iam_policy_document.allow_access_from_another_account.json
 }
 
@@ -27,7 +27,7 @@ data "aws_iam_policy_document" "allow_access_from_another_account" {
     ]
 
     resources = [
-      aws_s3_bucket.sheltr_web.id,
+      aws_s3_bucket.sheltr_web.arn,
       "${aws_s3_bucket.sheltr_web.arn}/*",
     ]
   }
