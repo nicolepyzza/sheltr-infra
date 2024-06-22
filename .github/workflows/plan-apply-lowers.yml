@@ -11,10 +11,7 @@ on:
 env:
     AWS_ACCESS_KEY: ${{ secrets.AWS_ACCESS_KEY_ID }}
     AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-    TF_VAR_bucket_name: 'www.sheltr.pet'
-    TF_VAR_environment: 'lowers'
-    TF_VAR_key: 'infra/tf/lowers.tfstate'
-
+    
 jobs:
   terraform-init-fmt:
     name: Terraform Init and Format
