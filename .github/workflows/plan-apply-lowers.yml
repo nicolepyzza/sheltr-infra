@@ -57,6 +57,7 @@ jobs:
   terraform-apply:
     name: Terraform Apply
     runs-on: ubuntu-latest
+    environment: lowers
     needs: terraform-plan  # Ensure this job runs after the plan job
     steps:
       - name: Checkout code
