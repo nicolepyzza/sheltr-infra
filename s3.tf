@@ -2,11 +2,6 @@ resource "aws_s3_bucket" "sheltr_web" {
   bucket = "www.sheltr.pet"
 }
 
-resource "aws_s3_bucket_acl" "sheltr_web" {
-  bucket = aws_s3_bucket.sheltr_web.id
-  acl    = "public-read"
-}
-
 resource "aws_s3_bucket_versioning" "sheltr_web" {
   bucket = aws_s3_bucket.sheltr_web.id
   versioning_configuration {
