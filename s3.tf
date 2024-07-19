@@ -41,7 +41,7 @@ resource "aws_s3_bucket_website_configuration" "sheltr_web" {
 }
 
 resource "aws_s3_bucket_public_access_block" "public_access_block" {
-  bucket = aws_s3_bucket.sheltr_web.id
+  bucket                  = aws_s3_bucket.sheltr_web.id
   block_public_acls       = false
   block_public_policy     = false
   ignore_public_acls      = false

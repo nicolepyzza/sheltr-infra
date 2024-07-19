@@ -21,7 +21,7 @@
 #   admin_create_user_config {
 #     allow_admin_create_user_only = true
 #   }
-  
+
 #   verification_message_template {
 #     email_message = "Your verification code is {####}"
 #     email_subject = "Verify your email for Sheltr"
